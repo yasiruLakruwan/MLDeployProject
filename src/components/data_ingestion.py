@@ -4,11 +4,14 @@ import sys
 #sys.path.append(str(Path(__file__).parent.parent))
 import pandas as pd
 import numpy as np
-from  src.exeption import CustomExeption
-from  src.logger import logging
+from src.exeption import CustomExeption
+from src.logger import logging
 
 from sklearn.model_selection import train_test_split
-from dataclasses import dataclass
+from dataclasses import dataclass 
+
+from src.components.data_transformation import DataTransformaton
+from src.components.data_transformation import DataTransformationConfig
 
 @dataclass
 class DataIngestionConfig:
@@ -48,4 +51,7 @@ class DataIngestion:
         
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_config()
+    train_data,test_data=obj.initiate_data_config()
+
+    data_transformation = DataTransformaton()
+    data_transformation.initiate_data_transformation(train_data,test_data)
